@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +40,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GreetingImage(
-                        message = "Happy Birthday Dylan!",
-                        from = "From Slickster",
+                        message = stringResource(R.string.happy_birthday_text),
+                        from = stringResource(R.string.signature_text),
 
                         )
                 }
@@ -57,7 +59,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 
         Text(
             text = message,
-            fontSize = 30.sp,
+            fontSize = 60.sp,
             lineHeight = 105.sp,
             textAlign = TextAlign.Center
         )
@@ -67,7 +69,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(16.dp)
                 .align(
-                    alignment = Alignment.End
+                    alignment = Alignment.CenterHorizontally
 
                 )
         )
@@ -81,7 +83,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
     Box(modifier) {
         Image(
             painter = image,
-            contentDescription = null
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F
         )
         GreetingText(
             message = message,
@@ -98,7 +102,10 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingImage(message = "Happy Birthday Dylan!", from = "From Slickster")
+        GreetingImage(
+            message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.signature_text)
+        )
     }
 
 }
